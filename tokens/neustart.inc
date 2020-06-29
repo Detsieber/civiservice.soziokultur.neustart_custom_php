@@ -16,7 +16,6 @@ function neustart_civitoken_declare($token){
     $token. '.textvmb' => 'Textbaustein für vorz. Maßnahmenbeginn',
     $token. '.texteigenanteil' => 'Textbaustein für Eigenanteil',
     $token. '.sonstigeauflagen' => 'Textbaustein für sonstige Auflagen',
-    $token. '.foerderbetrag' => 'Bewilligter Förderbetrag',
     $token. '.foerderbetraginworten' => 'Bewilligter Förderbetrag (in Worten)',
 
   );
@@ -101,9 +100,12 @@ $texteigenanteil = $cid;
     ]);
     $textvmb = "";
     if ($result['values'][0]['custom_393'])
-       $textvmb = '"html-code vor der Variablen"'.
+       $textvmb = '</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><strong>(2)</strong></td><td>Die
+Ausnahme vom grunds&auml;tzlichen Verbot des Projektbeginns vor der
+Bewilligung wurde Ihnen bereits seitens des Bundesverbandes mit Wirkung
+zum '.
                   date_format(date_create($result['values'][0]['custom_393']), 'd.m.yy').
-                   '"html-code nach der Variablen"';
+                   ' zugelassen.';
 
 /**
  * Ermitteln, ob ausnahmsweise der Eigenanteil von 10% nicht erbracht werden muss:
@@ -131,23 +133,20 @@ $texteigenanteil = $cid;
     ]);
     $sonstigeauflagen = "";
     if ($result['values'][0]['custom_439'] == 1)
-       $sonstigeauflagen = '"html-code vor der Variablen"'.
-                  $result['values'][0]['custom_440'].
-                   '"html-code nach der Variablen"';
+       $sonstigeauflagen = '</td></tr><tr><td>&nbsp;</td><td>&nbsp;</td></tr><tr><td><strong>(12)</strong></td><td><strong>Sonstige
+Vereinbarungen</strong><br />'.
+                  $result['values'][0]['custom_440'];
 
 /**
- * Ermitteln, des Förderbetrags: Entweder wie beantragt, oder abweichend.
- * Ausgabe des bewilligten Förderbetrags als Betrag und in Worten.
+ * Ermitteln, des Förderbetrags in Worten:
  */
 
     $result = civicrm_api3('Case', 'get', [
       'sequential' => 1,
-      'return' => ["custom_338", "custom_443"],
+      'return' => ["custom_338"],
       'id' => $caseId,
     ]);
     $foerderbetrag = $result['values'][0]['custom_338'];
-    if ($result['values'][0]['custom_443'] > 0)
-       $foerderbetrag = $result['values'][0]['custom_443'];
     $foerderbetraginworten = inWorten($foerderbetrag);
 
 /*  Fill in values to tokens
@@ -155,7 +154,6 @@ $texteigenanteil = $cid;
     $value['neustart.textvmb'] = $textvmb;
     $value['neustart.texteigenanteil'] = $texteigenanteil;
     $value['neustart.sonstigeauflagen'] = $sonstigeauflagen;
-    $value['neustart.foerderbetrag'] = $foerderbetrag;
     $value['neustart.foerderbetraginworten'] = $foerderbetraginworten;
 
 }
