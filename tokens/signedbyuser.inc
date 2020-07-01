@@ -16,6 +16,7 @@ function signedbyuser_civitoken_declare($token){
     $token. '.name' => 'Name Unterzeichnende',
     $token. '.function' => 'Funktion Unterzeichnende',
     $token. '.signature_html' => 'E-Mail-Signatur (html) Unterzeichnende',
+    $token. '.signature_text' => 'E-Mail-Signatur (Text) Unterzeichnende',
 
 
   );
@@ -56,6 +57,7 @@ function signedbyuser_civitoken_get($cid, &$value){
     ]);
 
     $signature_html = $result['values'][0]['signature_html'];
+    $signature_text = $result['values'][0]['signature_text'];
 
 
 
@@ -64,6 +66,7 @@ function signedbyuser_civitoken_get($cid, &$value){
     $value['signedbyuser.name'] = $display_name;
     $value['signedbyuser.function'] = $job_title;
     $value['signedbyuser.signature_html'] = $signature_html;
+    $value['signedbyuser.signature_text'] = $signature_text;
 
 
 
