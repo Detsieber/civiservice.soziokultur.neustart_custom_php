@@ -123,10 +123,10 @@ $result = civicrm_api3('Case', 'get', [
   'id' => $caseId,
 ]);
 $gliederunganlageoptional = "";
-$absatzanlageoptional = " sowie F - Allgemeine Nebenbestimmungen für Zuwendungen zur Projektförderung (ANBest-P)";
+$absatzanlageoptional = ' sowie G - Fördergrundsätze der BKM für "NEUSTART. Sofortprogramm für Corona-bedingte Investitionen in Kultureinrichtungen"';
 if ($result['values'][0]['custom_430'] == 1) {
-  $gliederunganlageoptional = "</li><li>Anlage H - Grundzüge der Vergabe (Stand Juni 2018)</li>";
-  $absatzanlageoptional = ", F - Allgemeine Nebenbestimmungen für Zuwendungen zur Projektförderung (ANBest-P) sowie H - Grundzüge der Vergabe (Stand Juni 2018)";
+  $gliederunganlageoptional = '</li><li>Anlage H - Grundzüge der Vergabe (Stand Juni 2018)</li>';
+  $absatzanlageoptional = ', G - Fördergrundsätze der BKM für "NEUSTART. Sofortprogramm für Corona-bedingte Investitionen in Kultureinrichtungen" sowie H - Grundzüge der Vergabe (Stand Juni 2018)';
 
 }
 
