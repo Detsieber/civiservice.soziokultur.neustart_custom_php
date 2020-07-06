@@ -126,7 +126,7 @@ $gliederunganlageoptional = "";
 $absatzanlageoptional = " sowie F - Allgemeine Nebenbestimmungen für Zuwendungen zur Projektförderung (ANBest-P)";
 if ($result['values'][0]['custom_430'] == 1) {
   $gliederunganlageoptional = "</li><li>Anlage H - Grundzüge der Vergabe (Stand Juni 2018)</li>";
-  $absatzanlageoptional = ", F - Allgemeine Nebenbestimmungen für Zuwendungen zur Projektförderung (ANBest-P) sowie Anlage H - Grundzüge der Vergabe (Stand Juni 2018)";
+  $absatzanlageoptional = ", F - Allgemeine Nebenbestimmungen für Zuwendungen zur Projektförderung (ANBest-P) sowie H - Grundzüge der Vergabe (Stand Juni 2018)";
 
 }
 
@@ -147,7 +147,7 @@ if ($result['values'][0]['custom_460'] == 2) {
     'return' => ["custom_300"],
     'id' => $caseId,
   ]);
-  $kultureinrichtung = '</td></tr><tr><td>&nbsp;</td><td style="border-bottom-style: solid; border-bottom-width:thin">für die Kultureinrichtung ' . $result['values'][0]['custom_460'];
+  $kultureinrichtung = '</td></tr><tr><td>&nbsp;</td><td style="border-bottom-style: solid; border-bottom-width:thin">für die Kultureinrichtung ' . $result['values'][0]['custom_300'];
 
 }
 
