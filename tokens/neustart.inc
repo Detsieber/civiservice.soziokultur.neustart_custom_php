@@ -1,9 +1,10 @@
 <?php
 /**
  * Created by Detlev Sieber
- * Last update: Detlev
- * Date: 26.6.2020
- * Time: 00:14
+ * Last update: Andreas Howiller
+ * Date: 06.07.2020
+ * Time: 08:30
+ * 
  */
 
 /**
@@ -146,7 +147,7 @@ if ($result['values'][0]['custom_460'] == 2) {
     'return' => ["custom_300"],
     'id' => $caseId,
   ]);
-  $kultureinrichtung = '</td></tr><tr><td>&nbsp;</td><td style="border-bottom-style: solid; border-bottom-width:thin">für die Kultureinrichtung ' . $result;
+  $kultureinrichtung = '</td></tr><tr><td>&nbsp;</td><td style="border-bottom-style: solid; border-bottom-width:thin">für die Kultureinrichtung ' . $result['values'][0]['custom_460'];
 
 }
 
