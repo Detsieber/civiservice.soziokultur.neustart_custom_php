@@ -17,10 +17,11 @@ function neustart_civitoken_declare($token){
     $token. '.texteigenanteil' => 'Textbaustein für Eigenanteil',
     $token. '.sonstigeauflagen' => 'Textbaustein für sonstige Auflagen',
     $token. '.foerderbetraginworten' => 'Bewilligter Förderbetrag (in Worten)',
-
+    $token. '.gliederunganlageoptional' => 'Textbaustein Inhalt für optionale Anlagen',
+    $token. '.absatzanlageoptional' => 'Textbaustein Absatz für optionale Anlagen',
+    $token. '.kultureinrichtung' => 'Textbaustein Antrag für Kultureinrichtung',
   );
 }
-
 
 
 function inWorten($num) {
@@ -109,6 +110,45 @@ Bewilligung wurde Ihnen bereits seitens des Bundesverbandes mit Wirkung
 zum '.
                   date_format(date_create($result['values'][0]['custom_393']), 'd.m.yy').
                    ' zugelassen.';
+                   
+/**
+ * Ermitteln, ob "mehrere Kultureinrichtungen zulässig":
+ * Wenn ja, wird ein anderer Textbaustein eingefügt.
+ */
+
+$result = civicrm_api3('Case', 'get', [
+  'sequential' => 1,
+  'return' => ["custom_430"],
+  'id' => $caseId,
+]);
+$gliederunganlageoptional = "";
+$absatzanlageoptional = " sowie F - Allgemeine Nebenbestimmungen für Zuwendungen zur Projektförderung (ANBest-P)";
+if ($result['values'][0]['custom_430'] == 1) {
+  $gliederunganlageoptional = "</li><li>Anlage H - Grundzüge der Vergabe (Stand Juni 2018)</li>";
+  $absatzanlageoptional = ", F - Allgemeine Nebenbestimmungen für Zuwendungen zur Projektförderung (ANBest-P) sowie Anlage H - Grundzüge der Vergabe (Stand Juni 2018)";
+
+}
+
+/**
+ * Ermitteln, ob "Antragsteller und Kultureinrichtung stimmen überein":
+ * Wenn nein, wird ein zusätzlicher Textbaustein eingefügt.
+ */
+
+$result = civicrm_api3('Case', 'get', [
+  'sequential' => 1,
+  'return' => ["custom_460"],
+  'id' => $caseId,
+]);
+$kultureinrichtung = "";
+if ($result['values'][0]['custom_460'] == 2) {
+  $result = civicrm_api3('Case', 'get', [
+    'sequential' => 1,
+    'return' => ["custom_300"],
+    'id' => $caseId,
+  ]);
+  $kultureinrichtung = '</td></tr><tr><td>&nbsp;</td><td style="border-bottom-style: solid; border-bottom-width:thin">für die Kultureinrichtung ' . $result;
+
+}
 
 /**
  * Ermitteln, ob ausnahmsweise der Eigenanteil von 10% nicht erbracht werden muss:
@@ -163,5 +203,8 @@ Vereinbarungen</strong><br />'.
     $value['neustart.texteigenanteil'] = $texteigenanteil;
     $value['neustart.sonstigeauflagen'] = $sonstigeauflagen;
     $value['neustart.foerderbetraginworten'] = $foerderbetraginworten;
+    $value['neustart.gliederunganlageoptional'] = $gliederunganlageoptional;
+    $value['neustart.absatzanlageoptional'] = $absatzanlageoptional;
+    $value['neustart.kultureinrichtung'] = $kultureinrichtung;
 
 }
