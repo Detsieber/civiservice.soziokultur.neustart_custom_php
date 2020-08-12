@@ -2,8 +2,8 @@
 /**
  * Created by Detlev Sieber
  * Last update: Andreas Howiller
- * Date: 06.07.2020
- * Time: 08:30
+ * Date: 12.08.2020
+ * Time: 14:00
  * 
  */
 
@@ -152,18 +152,22 @@ if ($result['values'][0]['custom_460'] == 2) {
 }
 
 /**
- * Ermitteln, ob ausnahmsweise der Eigenanteil von 10% nicht erbracht werden muss:
- * Wenn ja, wird ein anderer Textbaustein erzeugt.
+ * Ermitteln, ob ausnahmsweise der Eigenanteil von 10% überhauptnicht oder anteilig nicht erbracht werden muss:
+ * Für alle drei Möglichkeiten wird jeweils ein anderer Textbaustein eingefügt.
  */
 
     $result = civicrm_api3('Case', 'get', [
       'sequential' => 1,
-      'return' => ["custom_425"],
+      'return' => ["custom_425", "custom_330", "custom_333", "custom_334"],
       'id' => $caseId,
     ]);
-    $texteigenanteil = "Es ist eine Beteiligung durch Eigen- und/oder Drittmittel in Höhe von mindestens 10 % der zuwendungsfähigen Ausgaben aufzubringen.";
-    if ($result['values'][0]['custom_425'] == 1)
-       $texteigenanteil = "Die Beteiligung durch Eigen- und/oder Drittmittel in Höhe von mindestens 10 % der zuwendungsfähigen Ausgaben darf unterschritten werden. Eine entsprechende Begründung liegt vor.";
+    $gesamtausgaben = $result['values'][0]['custom_330'] + 0;
+    $eigenmittel = $result['values'][0]['custom_333'] + $result['values'][0]['custom_334'];
+    $texteigenanteil = "Die zuwendungsfähigen Gesamtausgaben des geförderten Projektes betragen insgesamt " .  $gesamtausgaben . " Euro. Davon finanziert der Letztempfänger insgesamt " .  $eigenmittel . " Euro durch Eigen- und/oder Drittmittel.";
+    if ($result['values'][0]['custom_425'] == 1) {
+       $texteigenanteil = "Die zuwendungsfähigen Gesamtausgaben des geförderten Projektes betragen insgesamt " . $gesamtausgaben . " Euro. Davon finanziert der Letztempfänger insgesamt " .  $eigenmittel . " Euro durch Eigen- und/oder Drittmittel. Ein begründeter Ausnahmefall für die Unterschreitung der Mindestbeteiligung liegt vor.";
+    } else if ($result['values'][0]['custom_425'] == 4)
+       $texteigenanteil = "Die zuwendungsfähigen Gesamtausgaben des geförderten Projektes betragen insgesamt " . $gesamtausgaben . " Euro. Der Letztempfänger bringt keine Eigen- und/oder Drittmittel zur Finanzierung ein. Ein begründeter Ausnahmefall für diese Ausnahme liegt vor.";
 
 /**
  * Ermitteln, ob die Bewilligung Auflagen enthält.
