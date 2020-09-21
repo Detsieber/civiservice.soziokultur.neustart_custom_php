@@ -1,9 +1,10 @@
 <?php
 /**
  * Created by Andreas Howiller
- * Last update: Andreas Howiller
- * Date: 28.08.2020
- * Time: 16:08
+ * Last update: Detlev Sieber
+ * Date: 21.09.2020
+ * Time: 14:08
+ * Wird ersetzt durch nkzentren.inc
  * 
  */
 
@@ -29,6 +30,14 @@ function _neustartkultur_get_case_id() {
     $matches = array();
     preg_match('#caseid=(\d+)#', $_POST['entryURL'], $matches);
     \Civi::$statics['neustartkultur']['case_id'] = CRM_Utils_Array::value(1, $matches);
+  }
+  if (empty(\Civi::$statics['neustartkultur']['case_id'])) {
+   if (isset($value['case_id'])) {
+      \Civi::$statics['neustartkultur']['case_id'] = $value['case_id'];
+    }
+    elseif (isset($value['case.id'])) {
+      \Civi::$statics['neustartkultur']['case_id'] = $value['case.id'];
+    }
   }
   return isset(\Civi::$statics['neustartkultur']['case_id']) ? \Civi::$statics['neustartkultur']['case_id'] : NULL;
 }
@@ -60,6 +69,7 @@ function neustartkultur_civitoken_get($cid, &$value){
   } else if ($result['values'][0]['custom_269'] == 2) {
     $bruttoodernetto = "Brutto";
   }
+
 
   /*  Fill in values to tokens
   */

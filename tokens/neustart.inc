@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by Detlev Sieber
- * Last update: Andreas Howiller
- * Date: 12.08.2020
- * Time: 14:00
+ * Last update: Detlev Sieber
+ * Date: 21.09.2020
+ * Time: 23:08
  * 
  */
 
@@ -79,8 +79,17 @@ function _neustart_get_case_id() {
     preg_match('#caseid=(\d+)#', $_POST['entryURL'], $matches);
     \Civi::$statics['neustart']['case_id'] = CRM_Utils_Array::value(1, $matches);
   }
+  if (empty(\Civi::$statics['neustart']['case_id'])) {
+   if (isset($value['case_id'])) {
+      \Civi::$statics['neustart']['case_id'] = $value['case_id'];
+    }
+    elseif (isset($value['case.id'])) {
+      \Civi::$statics['neustart']['case_id'] = $value['case.id'];
+    }
+  }
   return isset(\Civi::$statics['neustart']['case_id']) ? \Civi::$statics['neustart']['case_id'] : NULL;
 }
+
 
 /**
  * Now, the tokens are filled with their values:
