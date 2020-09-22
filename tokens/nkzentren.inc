@@ -240,10 +240,14 @@ Vereinbarungen</strong><br />'.
     ]);
     $pruefvermerkergebnis = "";
     if ($result['values'][0]['status_id'] == 6){
-       $pruefvermerkergebnis = 'Textbaustein für "abgelehnt"';
+       $pruefvermerkergebnis = '<p><strong>Die Zuwendung kann nicht bewilligt werden, da</strong>
+{case.custom_683} {case.custom_644}</p>
+<p><strong><em>Nach Aussch&ouml;pfung aller vertretbaren Pr&uuml;fungsm&ouml;glichkeiten werden die Kosten nicht als notwendig und angemessen anerkannt.</em></strong></p>';
        }
     elseif ($result['values'][0]['status_id'] == 5){
-       $pruefvermerkergebnis = 'Textbaustein für "bewilligt"';
+       $pruefvermerkergebnis = '<p><strong>Die Zuwendung kann bewilligt werden gem&auml;&szlig;</strong> [{case.custom_680}{case.custom_681}] </p>
+<p>in H&ouml;he von {case.custom_580}&nbsp;Euro.</p>
+<p><strong><em>Nach Aussch&ouml;pfung aller vertretbaren Pr&uuml;fungsm&ouml;glichkeiten werden die Kosten als notwendig und angemessen anerkannt.</em></strong></p>';
        };
 
 
