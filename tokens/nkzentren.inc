@@ -1,9 +1,9 @@
 <?php
 /**
  * Created by Andreas Howiller
- * Last update: Detlev Sieber
- * Date: 21.09.2020
- * Time: 23:01
+ * Last update: Andreas Howiller
+ * Date: 24.09.2020
+ * Time: 11:48
  * 
  */
 
@@ -235,17 +235,15 @@ Vereinbarungen</strong><br />'.
  */
     $result = civicrm_api3('Case', 'get', [
       'sequential' => 1,
-      'return' => ["status_id", "custom_580", "custom_644", "custom_680", "custom_681", "custom_683"],
+      'return' => ["status_id", "custom_580", "custom_680", "custom_681"],
       'id' => $caseId,
     ]);
     $pruefvermerkergebnis = "";
     if ($result['values'][0]['status_id'] == 6){
-       $pruefvermerkergebnis = '<p><strong>Die Zuwendung kann nicht bewilligt werden, da</strong>'.
-$result['values'][0][custom_683].$result['values'][0][custom_644].'</p>
-<p><strong><em>Nach Aussch&ouml;pfung aller vertretbaren Pr&uuml;fungsm&ouml;glichkeiten werden die Kosten nicht als notwendig und angemessen anerkannt.</em></strong></p>';
+       $pruefvermerkergebnis = '<strong><em>Nach Aussch&ouml;pfung aller vertretbaren Pr&uuml;fungsm&ouml;glichkeiten werden die Kosten nicht als notwendig und angemessen anerkannt.</em></strong><strong><br /><br />Die Zuwendung kann nicht bewilligt werden, da</strong>';
        }
     elseif ($result['values'][0]['status_id'] == 5){
-       $pruefvermerkergebnis = '<p><strong>Die Zuwendung kann bewilligt werden gem&auml;&szlig;</strong> ['.$result['values'][0][custom_680].$result['values'][0][custom_681].'] </p>
+       $pruefvermerkergebnis = '<p><strong>Die Zuwendung kann bewilligt werden gem&auml;&szlig;</strong><br /><br /> ['.$result['values'][0][custom_680].' '.$result['values'][0][custom_681].'] </p>
 <p>in H&ouml;he von '.$result['values'][0][custom_580].'&nbsp;Euro.</p>
 <p><strong><em>Nach Aussch&ouml;pfung aller vertretbaren Pr&uuml;fungsm&ouml;glichkeiten werden die Kosten als notwendig und angemessen anerkannt.</em></strong></p>';
        };
