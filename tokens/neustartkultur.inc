@@ -15,7 +15,7 @@
  */
 function neustartkultur_civitoken_declare($token){
   return array(
-    $token. '.bruttoodernetto' => 'Brutto oder Netto (ja nach Veranlagung)',
+    $token. '.bruttoodernetto' => 'brutto oder netto (ja nach Veranlagung)',
     $token. '.umsatzsteuerabgezogen' => 'Baustein Ust abgezogen (je nach Veranlagung)',
   );
 }
@@ -53,7 +53,7 @@ function neustartkultur_civitoken_get($cid, &$value){
 
   /**
    * Ermitteln der Auswahl "Abzugsberechtigung Vorsteuer":
-   * Wenn nein, Ausgabe "Brutto" wenn ja Ausgabe "Netto" sowie generierung Textbaustein zu Umsatzsteuerabzug
+   * Wenn nein, Ausgabe "brutto" wenn ja Ausgabe "netto" sowie generierung Textbaustein zu Umsatzsteuerabzug
    */
 
   $result = civicrm_api3('Case', 'get', [
@@ -61,13 +61,13 @@ function neustartkultur_civitoken_get($cid, &$value){
     'return' => ["custom_269"],
     'id' => $caseId,
   ]);
-  $bruttoodernetto = "Brutto/Netto";
+  $bruttoodernetto = "brutto/netto";
   $umsatzsteuerabgezogen = "";
   if ($result['values'][0]['custom_269'] == 1) {
-    $bruttoodernetto = "Netto";
+    $bruttoodernetto = "netto";
     $umsatzsteuerabgezogen = "Nach § 15 des UStG als Vorsteuer abziehbare Umsatzsteuer wurde abgezogen.";
   } else if ($result['values'][0]['custom_269'] == 2) {
-    $bruttoodernetto = "Brutto";
+    $bruttoodernetto = "brutto";
   }
 
 

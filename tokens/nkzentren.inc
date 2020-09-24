@@ -14,7 +14,7 @@
  */
 function nkzentren_civitoken_declare($token){
   return array(
-    $token. '.bruttoodernetto' => 'Brutto oder Netto (je nach Veranlagung)',
+    $token. '.bruttoodernetto' => 'brutto oder netto (je nach Veranlagung)',
     $token. '.umsatzsteuerabgezogen' => 'Baustein Ust abgezogen (je nach Veranlagung)',
     $token. '.textvmb' => 'Textbaustein für vorz. Maßnahmenbeginn',
     $token. '.kultureinrichtung' => 'Name der Kultureinrichtung, falls abweichender Name',
@@ -124,7 +124,7 @@ zum '.
 
   /**
    * Ermitteln der Auswahl "Abzugsberechtigung Vorsteuer":
-   * Wenn nein, Ausgabe "Brutto" wenn ja Ausgabe "Netto" sowie generierung Textbaustein zu Umsatzsteuerabzug
+   * Wenn nein, Ausgabe "brutto" wenn ja Ausgabe "netto" sowie generierung Textbaustein zu Umsatzsteuerabzug
    */
 
   $result = civicrm_api3('Case', 'get', [
@@ -132,13 +132,13 @@ zum '.
     'return' => ["custom_269"],
     'id' => $caseId,
   ]);
-  $bruttoodernetto = "Brutto/Netto";
+  $bruttoodernetto = "brutto/netto";
   $umsatzsteuerabgezogen = "";
   if ($result['values'][0]['custom_269'] == 1) {
-    $bruttoodernetto = "Netto";
+    $bruttoodernetto = "netto";
     $umsatzsteuerabgezogen = "Nach § 15 des UStG als Vorsteuer abziehbare Umsatzsteuer wurde abgezogen.";
   } else if ($result['values'][0]['custom_269'] == 2) {
-    $bruttoodernetto = "Brutto";
+    $bruttoodernetto = "brutto";
   }
 
 /**

@@ -21,7 +21,7 @@ function neustart_civitoken_declare($token){
     $token. '.gliederunganlageoptional' => 'Textbaustein Inhalt für optionale Anlagen',
     $token. '.absatzanlageoptional' => 'Textbaustein Absatz für optionale Anlagen',
     $token. '.kultureinrichtung' => 'Textbaustein Antrag für Kultureinrichtung',
-    $token. '.bruttoodernetto' => 'Brutto oder Netto (ja nach Steuerangabe)',
+    $token. '.bruttoodernetto' => 'brutto oder netto (ja nach Steuerangabe)',
   );
 }
 
@@ -197,7 +197,7 @@ Vereinbarungen</strong><br />'.
 
 /**
  * Ermitteln der Auswahl "Abzugsberechtigung Vorsteuer":
- * Wenn nein, Ausgabe "Brutto" wenn ja Ausgabe "Netto".
+ * Wenn nein, Ausgabe "brutto" wenn ja Ausgabe "netto".
  */
 
 $result = civicrm_api3('Case', 'get', [
@@ -205,10 +205,10 @@ $result = civicrm_api3('Case', 'get', [
   'return' => ["custom_269"],
   'id' => $caseId,
 ]);
-$bruttoodernetto = "Brutto/Netto";
+$bruttoodernetto = "brutto/netto";
 if ($result['values'][0]['custom_269'] == 1) {
-  $bruttoodernetto = "Netto";
-} else if ($result['values'][0]['custom_269'] == 2) $bruttoodernetto = "Brutto";
+  $bruttoodernetto = "netto";
+} else if ($result['values'][0]['custom_269'] == 2) $bruttoodernetto = "brutto";
 
 /**
  * Ermitteln, des Förderbetrags in Worten:
