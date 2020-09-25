@@ -2,8 +2,8 @@
 /**
  * Created by Andreas Howiller
  * Last update: Andreas Howiller
- * Date: 24.09.2020
- * Time: 11:48
+ * Date: 25.09.2020
+ * Time: 10:30
  * 
  */
 
@@ -148,7 +148,7 @@ zum '.
 
 $result = civicrm_api3('Case', 'get', [
   'sequential' => 1,
-  'return' => ["custom_460"],
+  'return' => ["custom_690"],
   'id' => $caseId,
 ]);
 $kultureinrichtung = "";
