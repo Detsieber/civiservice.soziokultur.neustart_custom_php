@@ -243,7 +243,7 @@ Vereinbarungen</strong><br />'.
        $pruefvermerkergebnis = '<strong><em>Nach Aussch&ouml;pfung aller vertretbaren Pr&uuml;fungsm&ouml;glichkeiten werden die Kosten nicht als notwendig und angemessen anerkannt.</em></strong><strong><br /><br />Die Zuwendung kann nicht bewilligt werden, da</strong>';
        }
     elseif ($result['values'][0]['status_id'] == 5){
-       $pruefvermerkergebnis = '<p><strong>Die Zuwendung kann bewilligt werden gem&auml;&szlig;</strong><br /><br /> ['.$result['values'][0][custom_680].' '.$result['values'][0][custom_681].'] </p>
+       $pruefvermerkergebnis = '<p><strong>Die Zuwendung kann als Festbetragsfinanzierung bewilligt werden gem&auml;&szlig;</strong><br /><br /> ['.$result['values'][0][custom_680].' '.$result['values'][0][custom_681].'] </p>
 <p>in H&ouml;he von '.$result['values'][0][custom_580].'&nbsp;Euro.</p>
 <p><strong><em>Nach Aussch&ouml;pfung aller vertretbaren Pr&uuml;fungsm&ouml;glichkeiten werden die Kosten als notwendig und angemessen anerkannt.</em></strong></p>';
        };
