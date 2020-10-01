@@ -66,7 +66,7 @@ function inWorten($num) {
   }
 */
 
-function _nkzentren_get_case_id() {
+function _nkzentren_get_case_id($value) {
   // Hack to get case id from the url
   if (!empty($_GET['caseid'])) {
     \Civi::$statics['nkzentren']['case_id'] = $_GET['caseid'];
@@ -95,7 +95,7 @@ function _nkzentren_get_case_id() {
  */
 function nkzentren_civitoken_get($cid, &$value){
 
-  $caseId = _nkzentren_get_case_id();
+  $caseId = _nkzentren_get_case_id($value);
 
   $textvmb = $caseId;
   $texteigenanteil = $cid;

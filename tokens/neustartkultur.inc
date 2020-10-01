@@ -20,7 +20,7 @@ function neustartkultur_civitoken_declare($token){
   );
 }
 
-function _neustartkultur_get_case_id() {
+function _neustartkultur_get_case_id($value) {
   // Hack to get case id from the url
   if (!empty($_GET['caseid'])) {
     \Civi::$statics['neustartkultur']['case_id'] = $_GET['caseid'];
@@ -49,7 +49,7 @@ function _neustartkultur_get_case_id() {
  */
 function neustartkultur_civitoken_get($cid, &$value){
 
-  $caseId = _neustartkultur_get_case_id();
+  $caseId = _neustartkultur_get_case_id($value);
 
   /**
    * Ermitteln der Auswahl "Abzugsberechtigung Vorsteuer":

@@ -68,7 +68,7 @@ function inWorten($num) {
   }
 
 
-function _neustart_get_case_id() {
+function _neustart_get_case_id($value) {
   // Hack to get case id from the url
   if (!empty($_GET['caseid'])) {
     \Civi::$statics['neustart']['case_id'] = $_GET['caseid'];
@@ -98,7 +98,7 @@ function _neustart_get_case_id() {
  */
 function neustart_civitoken_get($cid, &$value){
 
-$caseId = _neustart_get_case_id();
+$caseId = _neustart_get_case_id($value);
 
 $textvmb = $caseId;
 $texteigenanteil = $cid;
