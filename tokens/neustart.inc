@@ -177,7 +177,7 @@ if ($result['values'][0]['custom_460'] == 2) {
     if ($result['values'][0]['custom_425'] == 1) {
        $texteigenanteil = "Die zuwendungsfähigen Gesamtausgaben des geförderten Projektes betragen insgesamt " . $gesamtausgaben . " Euro. Davon finanziert der Letztempfänger insgesamt " .  $eigenmittel . " Euro durch Eigen- und/oder Drittmittel. Ein begründeter Ausnahmefall für die Unterschreitung der Mindestbeteiligung liegt vor.";
     } else if ($result['values'][0]['custom_425'] == 4)
-       $texteigenanteil = "Die zuwendungsfähigen Gesamtausgaben des geförderten Projektes betragen insgesamt " . $gesamtausgaben . " Euro. Der Letztempfänger bringt keine Eigen- und/oder Drittmittel zur Finanzierung ein. Ein begründeter Ausnahmefall für diese Ausnahme liegt vor.";
+       $texteigenanteil = "Die zuwendungsfähigen Gesamtausgaben des geförderten Projektes betragen insgesamt " . $gesamtausgaben . " Euro. Der Letztempfänger bringt keine Eigen- und/oder Drittmittel zur Finanzierung ein. Eine Begründung liegt für diese Ausnahme vor.";
 
 /**
  * Ermitteln, ob die Bewilligung Auflagen enthält.
