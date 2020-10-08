@@ -238,7 +238,7 @@ Vereinbarungen</strong><br />'.
       'return' => ["status_id", "custom_580", "custom_680", "custom_681"],
       'id' => $caseId,
     ]);
-    $pruefvermerkergebnis = "";
+    $pruefvermerkergebnis = "Fehler: Der Status des Falls muss entweder Abgelehnt oder Bewilligt sein um die gew&uuml;nschte Angabe ausgeben zu k&ouml;nnen.";
     if ($result['values'][0]['status_id'] == 6){
        $pruefvermerkergebnis = '<strong><em>Nach Aussch&ouml;pfung aller vertretbaren Pr&uuml;fungsm&ouml;glichkeiten werden die Kosten nicht als notwendig und angemessen anerkannt.</em></strong><strong><br /><br />Die Zuwendung kann nicht bewilligt werden, da</strong>';
        }
