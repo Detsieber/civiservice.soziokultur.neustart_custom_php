@@ -19,44 +19,10 @@ function nkprogramm_civitoken_declare($token){
 }
 
 
-/* Diese Funktion ist bereits in neustart.inc enthalten!
-function inWorten($num) {
-    $num = str_replace(array(',', ' '), '' , trim($num));
-    if(!$num) {
-      return false;
-    }
-    $num = (int) $num;
-    $words = array();
-    $list1 = array('', 'ein', 'zwei', 'drei', 'vier', 'fünf', 'sechs', 'sieben', 'acht', 'neun', 'zehn', 'elf',
-      'zwölf', 'dreizehn', 'vierzehn', 'fünfzehn', 'sechzehn', 'siebzehn', 'achtzehn', 'neunzehn'
-    );
-    $list2 = array('', 'zehn', 'zwanzig', 'dreißig', 'vierzig', 'fünfzig', 'sechzig', 'siebzig', 'achtzig', 'neunzig', 'hundert');
-    $list3 = array('', 'tausend', 'millionen', 'milliarden'
-    );
-    $num_length = strlen($num);
-    $levels = (int) (($num_length + 2) / 3);
-    $max_length = $levels * 3;
-    $num = substr('00' . $num, -$max_length);
-    $num_levels = str_split($num, 3);
-    for ($i = 0; $i < count($num_levels); $i++) {
-      $levels--;
-      $hundreds = (int) ($num_levels[$i] / 100);
-      $hundreds = ($hundreds ? ' ' . $list1[$hundreds] . ' hundert' . ' ' : '');
-      $tens = (int) ($num_levels[$i] % 100);
-      $singles = '';
-      if ( $tens < 20 ) {
-          $tens = ($tens ? ' ' . $list1[$tens] . ' ' : '' );
-      } else {
-          $tens = (int)($tens / 10);
-          $tens = ' ' . $list2[$tens] . ' ';
-          $singles = (int) ($num_levels[$i] % 10);
-          $singles = ' ' . $list1[$singles] . ' und ';
-      }
-      $words[] = $hundreds .  $singles .$tens . ( ( $levels && ( int ) ( $num_levels[$i] ) ) ? ' ' . $list3[$levels] . ' ' : '' );
-    } 
-    return implode(' ', $words);
-  }
+/* Diese Funktion ist bereits in neustart.inc enthalten.
+function inWorten...
 */
+
 
 function _nkprogramm_get_case_id($value) {
   // Hack to get case id from the url
@@ -99,8 +65,7 @@ function nkprogramm_civitoken_get($cid, &$value){
       'id' => $caseId,
     ]);
     $foerderbetrag = $result['values'][0]['custom_748'];
-    $foerderbetragganzzahl = floor($foerderbetrag);
-    $foerderbetraginworten = inWorten($foerderbetragganzzahl);
+    $foerderbetraginworten = inWorten($foerderbetrag, 'EUR');
 
   /*  Fill in values to tokens
   */

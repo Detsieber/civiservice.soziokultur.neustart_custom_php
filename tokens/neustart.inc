@@ -25,7 +25,20 @@ function neustart_civitoken_declare($token){
   );
 }
 
+require_once('Numbertext.php');
 
+function inWorten($num, $currency = '') {
+    $num = str_replace(array(',', ' '), '' , trim($num));
+	if ($num === '') {
+		return '';
+	} elseif ($currency == '') {
+		return Numbertext::numbertext($num, 'de-DE');
+	} else {
+		return Numbertext::moneytext($num, $currency, 'de-DE');
+	}
+}
+
+/*
 function inWorten($num) {
     $num = str_replace(array(',', ' '), '' , trim($num));
     if(!$num) {
@@ -56,16 +69,17 @@ function inWorten($num) {
           $tens = (int)($tens / 10);
           $tens = ' ' . $list2[$tens] . ' ';
           $singles = (int) ($num_levels[$i] % 10);
-          $singles = ' ' . $list1[$singles] . ' und ';
+          $singles = ' ' . $list1[$singles] . ($singles ? ' und ' : '');
       }
       $words[] = $hundreds .  $singles .$tens . ( ( $levels && ( int ) ( $num_levels[$i] ) ) ? ' ' . $list3[$levels] . ' ' : '' );
     } //end for loop
-/*    $commas = count($words);
+|*    $commas = count($words);
     if ($commas > 1) {
       $commas = $commas - 1;
-    } */
+    } *|
     return implode(' ', $words);
   }
+*/
 
 
 function _neustart_get_case_id($value) {
@@ -224,8 +238,7 @@ if ($result['values'][0]['custom_269'] == 1) {
 // Test:
 //$foerderbetrag = 1886799.08;
 
-    $foerderbetragganzzahl = floor($foerderbetrag);
-    $foerderbetraginworten = inWorten($foerderbetragganzzahl);
+    $foerderbetraginworten = inWorten($foerderbetrag, 'EUR');
 
 /*  Fill in values to tokens
  */

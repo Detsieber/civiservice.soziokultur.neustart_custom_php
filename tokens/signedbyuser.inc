@@ -2,9 +2,9 @@
 /**
  * Created by Detlev Sieber
  * Last update: Andreas Howiller
- * Last changes: added tokens for primary email and phone
- * Date: 19.08.2020
- * Time: 11:55
+ * Last changes: added check for results of requests before filling variables to prevent dompdf from creating broken files
+ * Date: 03.11.2020
+ * Time: 15:08
  */
 
 /**
@@ -44,10 +44,22 @@ function signedbyuser_civitoken_get($cid, &$value){
       'id' => $currentuser,
     ));
 
-    $display_name = $result['values'][0]['display_name'];
-    $job_title = $result['values'][0]['job_title'];
-    $primary_email = $result['values'][0]['email'];
-    $primary_phone = $result['values'][0]['phone'];
+    if(isset($result['values'][0]['display_name'])) {
+      $display_name = $result['values'][0]['display_name'];
+    } else $display_name = "";
+
+    if(isset($result['values'][0]['job_title'])) {
+      $job_title = $result['values'][0]['job_title'];
+    } else $job_title = "";
+
+    if(isset($result['values'][0]['primary_email'])) {
+      $primary_email = $result['values'][0]['primary_email'];
+    } else $primary_email = "";
+
+    if(isset($result['values'][0]['primary_phone'])) {
+      $primary_phone = $result['values'][0]['primary_phone'];
+    } else $primary_phone = "";
+
 		
 /*  Get email signature (html) from primary email address of the logged-in contact
 */
@@ -58,10 +70,13 @@ function signedbyuser_civitoken_get($cid, &$value){
       'is_primary' => 1,
     ]);
 
-    $signature_html = $result['values'][0]['signature_html'];
-    $signature_text = $result['values'][0]['signature_text'];
-
-
+    if(isset($result['values'][0]['signature_html'])) {
+      $signature_html = $result['values'][0]['signature_html'];
+    } else $signature_html = "";
+    
+    if(isset($result['values'][0]['signature_text'])) {
+      $signature_text = $result['values'][0]['signature_text'];
+    } else $signature_text = "";
 
 /*  Fill in values to tokens
  */
